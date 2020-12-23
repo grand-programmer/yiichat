@@ -15,8 +15,8 @@ $this->title = 'Messages';
                             </div>
                         </div>
                         <div class="panel-body msg_container_base">
-                            <? foreach($messages as $message):?>
-                                <? if(Yii::$app->user->identity->role==\common\models\User::ROLE_ADMIN or $message->status==1): ?>
+                            <?php foreach($messages as $message):?>
+                                <?php if(Yii::$app->user->identity->role==\common\models\User::ROLE_ADMIN or $message->status==1): ?>
                                     <?php if(Yii::$app->getUser()->id==$message->sender):?>
                                         <div class="row msg_container base_sent <?= (\common\models\User::isAdmin($message->sender))?"admin-message":""?>">
                                             <div class="col-md-11 col-xs-11">
@@ -44,9 +44,9 @@ $this->title = 'Messages';
                                             </div>
                                         </div>
                                     <?php endif;
-                                endif;?>
+                                endif; ?>
 
-                            <? endforeach;?>
+                            <?php endforeach;?>
                             <?php  if(Yii::$app->user->identity->role==\common\models\User::ROLE_ADMIN): ?>
                                 <script type="text/javascript">
                                     function correct(message_id,el){
