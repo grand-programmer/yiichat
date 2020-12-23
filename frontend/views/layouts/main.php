@@ -47,7 +47,7 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
         if (Yii::$app->user->identity->role==\common\models\User::ROLE_ADMIN){
-            $menuItems[] = ['label' => 'Users', 'url' => ['/user/index']];
+            $menuItems[] = ['label' => 'Users', 'url' => ['/admin/user/index']];
         }
         $menuItems[] = '<li>'
             . Html::beginForm(['/site/logout'], 'post')
