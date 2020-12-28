@@ -48,6 +48,7 @@ class Messages extends ActiveRecord
             [['status'], 'boolean'],
             [['text'], 'required'],
             [['text'], 'string'],
+            [['text','sender'],'filter','filter'=>'\yii\helpers\HtmlPurifier::process'],
         ];
     }
 
@@ -62,5 +63,11 @@ class Messages extends ActiveRecord
             'text' => 'Text',
             'status' => 'Корректный',
         ];
+    }
+    public function changeStatus(){
+        if($this->status)
+            $this->status = false;
+        else
+            $this->status = true;
     }
 }

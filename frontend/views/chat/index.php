@@ -40,6 +40,10 @@ $this->title = 'Messages';
                                             <div class="col-md-11 col-xs-11">
                                                 <div class="messages msg_receive">
                                                     <p><?=$message->text ?></p>
+                                                    <?php
+                                                    if(Yii::$app->user->identity->role==\common\models\User::ROLE_ADMIN): ?>
+                                                        <a class="correct-wrong" onclick="correct(<?=$message->id?>,this);"><?= ($message->status==1)?"Корректный":"Не корректный" ?></a>
+                                                    <?php endif;?>
                                                 </div>
                                             </div>
                                         </div>

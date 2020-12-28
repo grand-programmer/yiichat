@@ -37,12 +37,12 @@ class UserController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'actions' => ['update','index'],
+                        'actions' => ['update','index','view'],
                         'roles' => [User::ROLE_ADMIN],
                     ],
                     [
                         'allow' => false,
-                        'actions' => ['create','delete','view'],
+                        'actions' => ['create','delete'],
                     ],
                 ],
             ]

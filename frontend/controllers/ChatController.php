@@ -56,18 +56,17 @@ class ChatController extends Controller
 
     public function actionCorrect()
     {
-        $message = $this->findModel(Yii::$app->request->post('id'));
+        $message = $this->findModel(intval(Yii::$app->request->post('id')));
         if($message ) {
-            if($message->status==true) {
-                $message->status = false;
+            if($message->status) {
                 $text="Не корректный";
             }
             else {
-                $message->status=true;
-                $text="Корректный";
+                 $text="Корректный";
             }
-            if($message->save())
-                return json_encode(['text'=>$text]);
+            $message->changeStatus();
+            $message->save();
+            return json_encode(['text'=>$text]);
         }
 
     }
@@ -95,7 +94,7 @@ class ChatController extends Controller
     public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel(intval($id)),
         ]);
     }
 
@@ -106,8 +105,10 @@ class ChatController extends Controller
      */
     public function actionCreate()
     {
+        $data=Yii::$app->request->post();
+        $data['sender']=Yii::$app->user->id;
         $model = new Messages();
-        $model->load(Yii::$app->request->post());
+        $model->load($data);
         $model->save();
         return $this->redirect(['index']);
     }
